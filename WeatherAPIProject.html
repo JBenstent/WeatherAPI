@@ -1,0 +1,47 @@
+<!-- &APPID=f6b6397e9b6d0c910881068caef5ae5f -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Weather App</title>
+        <link rel="stylesheet" href="weather.css">
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script>
+        $(document).ready(function() {
+          $('form').submit(function() {
+            var cityweb =
+            "http://api.openweathermap.org/data/2.5/weather?q=" +
+            $('#cityname').val() +
+            "&units=imperial" +
+            '&APPID=f6b6397e9b6d0c910881068caef5ae5f';
+
+              $.get(cityweb, function(res) {
+                $("#output").html(
+                  "<h2>" + res.name + "</h2>" +
+                  "<p>" + "Current Temperature: " + res.main.temp + "</p>" +
+                  "<p>" + "Maximum Temperature: " + res.main.temp_max + "</p>" +
+                  "<p>" + "Wind Speed: " + res.wind.speed + " mph" + "</p>" +
+                  "<p>" + "Country: " + res.sys.country + "</p>"
+                )
+              }, 'json');
+              // don't forget to return false so the page doesn't refresh
+              return false;
+          });
+      });
+
+        </script>
+    </head>
+    <body>
+      <div id="container">
+          <div id="input">
+            <h3>Find the Temperature of a City!</h3>
+           <form>
+            <input id="cityname" type="text">
+            <input id="submit" type="submit">
+           </form>
+
+          <div id='output'>
+          </div>
+      </div>
+    </body>
+</html>
